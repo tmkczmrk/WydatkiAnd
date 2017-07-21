@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:minWidth="25px"
+        android:minHeight="25px">
+        <TableLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tableLayout1"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true">
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:minWidth="25px"
+                android:minHeight="25px">
+                <TextView
+                    android:text="Kwota"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/textView321"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:minWidth="25px"
+                android:minHeight="25px">
+                <EditText
+                    android:inputType="numberDecimal"
+                    android:digits="0123456789.,"
+                    android:layout_column="0"
+                    android:id="@+id/editIncomeAmount"
+                    android:minWidth="150dp" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow3"
+                android:minWidth="25px"
+                android:minHeight="25px">
+                <TextView
+                    android:text="Data"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/textView322"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow4"
+                android:minWidth="25px"
+                android:minHeight="25px">
+                <EditText
+                    android:inputType="date"
+                    android:layout_column="0"
+                    android:id="@+id/editIncomeDate"
+                    android:focusable="false"
+                    android:minWidth="150dp" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow5"
+                android:minWidth="25px"
+                android:minHeight="25px">
+                <TextView
+                    android:text="Opis"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/textView321"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow6"
+                android:minWidth="25px"
+                android:minHeight="25px">
+                <EditText
+                    android:layout_column="0"
+                    android:id="@+id/editIncomeDetails"
+                    android:minWidth="150dp" />
+            </TableRow>
+        </TableLayout>
+        <Button
+            android:text="Dodaj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addIncomeBtn"
+            android:paddingTop="10dp"
+            android:gravity="center" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <GridLayout
+        android:id="@+id/IncGrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:rowCount="2"
+        android:columnCount="2"
+        android:layout_marginBottom="5.0dp"
+        android:layout_marginRight="0.0dp">
+        <TextView
+            android:text="Podaj datę początkową"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/textView1" />
+        <TextView
+            android:text="Podaj datę końcową"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/textView2"
+            android:layout_marginRight="0.0dp" />
+        <EditText
+            android:inputType="date"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:focusable="false"
+            android:id="@+id/editStartDate" />
+        <EditText
+            android:inputType="date"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:focusable="false"
+            android:id="@+id/editEndDate" />
+    </GridLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="370.0dp"
+        android:id="@+id/incomesList"
+        android:layout_marginBottom="0.0dp" />
+</LinearLayout>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
+    <TextView
+        android:text="Wydatek z dnia:"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView123"
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:gravity="center_horizontal" />
+    <EditText
+        android:inputType="numberDecimal"
+        android:digits="0123456789.,"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editExpenseDateDialog"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/holo_blue_dark" />
+    <TextView
+        android:text="Kwota"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView133"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:gravity="center_horizontal" />
+    <EditText
+        android:inputType="numberDecimal"
+        android:digits="0123456789.,"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editExpenseAmountDialog"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/holo_blue_dark" />
+    <TextView
+        android:text="Opis"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView143"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:gravity="center_horizontal" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editExpenseDetailsDialog"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/holo_blue_dark" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Kategoria:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView144"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/holo_blue_dark"
+            android:gravity="center_horizontal" />
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView145"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/holo_blue_dark"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Zmień na:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView146"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/holo_blue_dark"
+            android:gravity="center_horizontal" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#9A8F8F"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginLeft="10dp">
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:id="@+id/spinnerExpenseEdit" />
+        </RelativeLayout>
+        <Button
+            android:text="Zmień"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/btnExpenseEdit"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+</LinearLayout>

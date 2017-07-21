@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <GridLayout
+        android:id="@+id/ExpGrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:rowCount="3"
+        android:columnCount="2"
+        android:layout_marginBottom="5.0dp"
+        android:layout_marginRight="0.0dp">
+        <TextView
+            android:text="Podaj datę początkową"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
+        <TextView
+            android:text="Podaj datę końcową"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginRight="0.0dp" />
+        <EditText
+            android:inputType="date"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:focusable="false"
+            android:id="@+id/editExpStartDate" />
+        <EditText
+            android:inputType="date"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:focusable="false"
+            android:id="@+id/editExpEndDate" />
+        <TextView
+            android:text="Wybierz Kategorię"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:id="@+id/spinnerShowExp" />
+    </GridLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="330.0dp"
+        android:id="@+id/expensesList"
+        android:layout_marginBottom="0.0dp" />
+</LinearLayout>

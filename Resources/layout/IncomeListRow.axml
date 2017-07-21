@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout11"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFDAFF7F"
+    android:padding="3dp"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <GridLayout
+        android:id="@+id/Grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:rowCount="1"
+        android:columnCount="3"
+        android:layout_margin="3dp">
+        <TextView
+            android:id="@+id/incomeRowText1"
+            android:text=""
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#FF7F3300"
+            android:textSize="20dip"
+            android:textStyle="italic"
+            android:padding="3dp" />
+        <TextView
+            android:id="@+id/incomeRowText2"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#FF7F3300"
+            android:textSize="20dip"
+            android:textStyle="italic"
+            android:padding="3dp" />
+        <TextView
+            android:id="@+id/incomeRowText3"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="14dip"
+            android:textColor="#FF267F00"
+            android:padding="3dp"
+            android:layout_gravity="top" />
+    </GridLayout>
+</RelativeLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
+    <TextView
+        android:text="Przychód z dnia:"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView12"
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:gravity="center_horizontal" />
+    <EditText
+        android:inputType="numberDecimal"
+        android:digits="0123456789.,"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editIncomeDateDialog"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/holo_blue_dark" />
+    <TextView
+        android:text="Kwota"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView13"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:gravity="center_horizontal" />
+    <EditText
+        android:inputType="numberDecimal"
+        android:digits="0123456789.,"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editIncomeAmountDialog"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/holo_blue_dark" />
+    <TextView
+        android:text="Opis"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView14"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:gravity="center_horizontal" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editIncomeDetailsDialog"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/holo_blue_dark" />
+</LinearLayout>

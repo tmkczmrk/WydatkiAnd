@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
+    android:minWidth="25px"
+    android:minHeight="25px">
+<!--<include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />-->
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:stretchColumns="0">
+        <TableRow>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_marginTop="20dp">
+                <Button
+                    android:id="@+id/AddBtn"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="Dodaj Wpis" />
+                <Button
+                    android:id="@+id/ReportsBtn"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="Raporty" />
+            </RelativeLayout>
+        </TableRow>
+        <TableRow>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="40dp"
+                android:layout_marginTop="30dp">
+                <TextView
+                    android:text="@string/Welcome"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textWelcome"
+                    android:textColor="@android:color/background_dark"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingLeft="20dp" />
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/textBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textWelcome"
+                    android:paddingLeft="100dp" />
+                <TextView
+                    android:text="do przodu/do tyłu"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/textWelcome"
+                    android:id="@+id/textPlusMinus"
+                    android:paddingRight="20dp" />
+            </RelativeLayout>
+        </TableRow>
+        <TableRow>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+                <TextView
+                    android:text="Limit miesięczny:"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textMonthLimit"
+                    android:paddingLeft="20dp" />
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textMonthLimit"
+                    android:id="@+id/textMonthLimitShow"
+                    android:paddingLeft="100dp" />
+                <Button
+                    android:text="Zmień"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/btnChangeMonthLimit"
+                    android:layout_marginRight="20dp" />
+            </RelativeLayout>
+        </TableRow>
+        <TableRow>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+                <TextView
+                    android:text="Szacunkowe rachunki:"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textEstBills"
+                    android:paddingLeft="20dp" />
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textEstBills"
+                    android:id="@+id/textEstBillsShow"
+                    android:paddingLeft="100dp" />
+                <Button
+                    android:text="Zmień"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/btnChangeEstBills"
+                    android:layout_marginRight="20dp" />
+            </RelativeLayout>
+        </TableRow>
+    </TableLayout>
+</RelativeLayout>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:minWidth="25px"
+        android:minHeight="25px">
+        <TableLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tableLayout2"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true">
+            <TableRow
+                android:id="@+id/tableRow21"
+                android:minWidth="25px"
+                android:minHeight="25px">
+                <TextView
+                    android:text="Kwota"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow22"
+                android:minWidth="25px"
+                android:minHeight="25px">
+                <EditText
+                    android:inputType="numberDecimal"
+                    android:digits="0123456789.,"
+                    android:layout_column="0"
+                    android:id="@+id/editExpenseAmount"
+                    android:minWidth="150dp" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow23"
+                android:minWidth="25px"
+                android:minHeight="25px">
+                <TextView
+                    android:text="Data"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow24"
+                android:minWidth="25px"
+                android:minHeight="25px">
+                <EditText
+                    android:inputType="date"
+                    android:layout_column="0"
+                    android:id="@+id/editExpenseDate"
+                    android:focusable="false"
+                    android:minWidth="150dp" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow25"
+                android:minWidth="25px"
+                android:minHeight="25px">
+                <TextView
+                    android:text="Opis"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow26"
+                android:minWidth="25px"
+                android:minHeight="25px">
+                <EditText
+                    android:layout_column="0"
+                    android:id="@+id/editExpenseDetails"
+                    android:minWidth="150dp" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow27"
+                android:minWidth="25px"
+                android:minHeight="25px">
+                <TextView
+                    android:text="Kategoria"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow28"
+                android:minWidth="25px"
+                android:minHeight="25px">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearLayout1">
+                    <Spinner
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:id="@+id/spinnerCategory" />
+                    <Button
+                        android:text="Edytuj"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btnCategories"
+                        android:layout_marginLeft="20dp" />
+                </LinearLayout>
+            </TableRow>
+        </TableLayout>
+        <Button
+            android:text="Dodaj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addExpenseBtn"
+            android:paddingTop="10dp"
+            android:gravity="center" />
+    </LinearLayout>
+</ScrollView>
