@@ -11,24 +11,24 @@ using WydatkiAnd.Services;
 using System.IO;
 using WydatkiAnd.Database;
 using SQLiteNetExtensions.Extensions;
+using Android.Views;
+using Android.Views.InputMethods;
 
 namespace WydatkiAnd
 {
     [Activity(Label = "WydatkiAnd", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        string monthLimit;
-        string estBills;
-        decimal balance;
-        string catname;
+        float monthLimit;
+        float estBills;
+        float balance;
         
 
         private Button AddBtn;
         private Button ReportsBtn;
-        private Button ChangeMonthLimitBtn;
-        private Button ChangeEstBillsBtn;
-        private TextView monthLimitTV;
-        private TextView estBillsTV;
+        
+        private EditText editMonthLimit;
+        private EditText editEstBills;
         private TextView balanceTV;
 
         
@@ -48,85 +48,59 @@ namespace WydatkiAnd
             
             FindId();
 
-            StartActions();
+            AddBtn.Click += AddBtn_Click;
+            ReportsBtn.Click += ReportsBtn_Click;
 
-            var limit = Application.Context.GetSharedPreferences("MyValues", FileCreationMode.Private);
-            monthLimit = limit.GetString("Limit", null);
+            var limit = Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private);
+            monthLimit = limit.GetFloat("Limit", 0);
 
-            monthLimitTV.Text = monthLimit;
+            editMonthLimit.Text = monthLimit.ToString();
 
-            var bills = Application.Context.GetSharedPreferences("MyValues", FileCreationMode.Private);
-            estBills = bills.GetString("EstBills", null);
+            var bills = Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private);
+            estBills = bills.GetFloat("EstBills", 0);
 
-            estBillsTV.Text = estBills;
+            editEstBills.Text = estBills.ToString();
             balanceTV.Text = balance.ToString();
 
-
-            var docFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-
-            var dbFile = Path.Combine(docFolder, "Wydatkidb.sqlite");
-
-           
+            editMonthLimit.KeyPress += EditMonthLimit_KeyPress;
+            editEstBills.KeyPress += EditEstBills_KeyPress;
+            
         }
 
-        
+        private void EditEstBills_KeyPress(object sender, Android.Views.View.KeyEventArgs e)
+        {
+            e.Handled = false;
+            if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
+            {
+                estBills = Java.Lang.Float.ParseFloat(editEstBills.Text.ToString().Replace(',', '.'));
 
+                InputMethodManager inputManager = (InputMethodManager)Application.GetSystemService(Context.InputMethodService);
+                inputManager.HideSoftInputFromWindow(editEstBills.WindowToken, HideSoftInputFlags.None);
+                e.Handled = true;
+            }
+        }
+
+        private void EditMonthLimit_KeyPress(object sender, Android.Views.View.KeyEventArgs e)
+        {
+            e.Handled = false;
+            if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
+            {
+                monthLimit = Java.Lang.Float.ParseFloat(editMonthLimit.Text.ToString().Replace(',', '.'));
+
+                InputMethodManager inputManager = (InputMethodManager)Application.GetSystemService(Context.InputMethodService);
+                inputManager.HideSoftInputFromWindow(editMonthLimit.WindowToken, HideSoftInputFlags.None);
+                e.Handled = true;
+            }
+        }
 
         void FindId()
         {
             AddBtn = FindViewById<Button>(Resource.Id.AddBtn);
             ReportsBtn = FindViewById<Button>(Resource.Id.ReportsBtn);
-            ChangeMonthLimitBtn = FindViewById<Button>(Resource.Id.btnChangeMonthLimit);
-            ChangeEstBillsBtn = FindViewById<Button>(Resource.Id.btnChangeEstBills);
-            monthLimitTV = FindViewById<TextView>(Resource.Id.textMonthLimitShow);
-            estBillsTV = FindViewById<TextView>(Resource.Id.textEstBillsShow);
+            editMonthLimit = FindViewById<EditText>(Resource.Id.editMonthLimit);
+            editEstBills = FindViewById<EditText>(Resource.Id.editEstBills);
             balanceTV = FindViewById<TextView>(Resource.Id.textBalance);
         }
-
-        void StartActions()
-        {
-
-            AddBtn.Click += AddBtn_Click;
-
-            ReportsBtn.Click += ReportsBtn_Click;
-
-            ChangeMonthLimitBtn.Click += ChangeMonthLimitBtn_Click;
-
-            ChangeEstBillsBtn.Click += ChangeEstBillsBtn_Click;
-        }
-
-        private void ChangeEstBillsBtn_Click(object sender, EventArgs e)
-        {
-            var dialog = EstBillsDialog.NewInstance();
-            dialog.DialogClosed += OnEstBillsDialogClosed;
-            dialog.Show(FragmentManager, "dialog");
-        }
-
-        private void ChangeMonthLimitBtn_Click(object sender, System.EventArgs e)
-        {
-            var dialog = LimitDialog.NewInstance();
-            dialog.DialogClosed += OnLimitDialogClosed;
-            dialog.Show(FragmentManager, "dialog");
-            
-        }
-
-        private void OnEstBillsDialogClosed(object sender, EventArgs e)
-        {
-            var bills = Application.Context.GetSharedPreferences("MyValues", FileCreationMode.Private);
-            estBills = bills.GetString("EstBills", null);
-
-            estBillsTV.Text = estBills;
-
-        }
-
-        private void OnLimitDialogClosed(object sender, EventArgs e)
-        {
-            var limit = Application.Context.GetSharedPreferences("MyValues", FileCreationMode.Private);
-            monthLimit = limit.GetString("Limit", null);
-
-            monthLimitTV.Text = monthLimit;
-        }
-
         private void ReportsBtn_Click(object sender, System.EventArgs e)
         {
             var intent = new Intent(this, typeof(ReportsActivity));
