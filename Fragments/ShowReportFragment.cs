@@ -73,16 +73,37 @@ namespace WydatkiAnd.Fragments
             selectedYear = today.Year;
 
             SetAmounts();
-
             
-            //startDate = new DateTime(selectedYear, selectedMonth, 1);
-
             return view;
         }
 
         private void BtnShowReport_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            
+            Expense checkDate;
+            using (var db = new ExpenseManager())
+            {
+                checkDate = (from a in db.GetAllItems()
+                            where a.Date.Month == selectedMonth && a.Date.Year == selectedYear
+                            select a).FirstOrDefault();
+            }
+
+            if (checkDate != null)
+            {
+                var dialog = ReportDialog.NewInstance(selectedMonth, selectedYear);
+                dialog.DialogClosed += OnDialogClosed;
+                dialog.Show(FragmentManager, "dialog");
+            } else
+            {
+                Toast.MakeText(this.Activity, string.Format
+                ("Brak wpisów w tym miesiącu"),
+                ToastLength.Short).Show();
+            }
+        }   
+
+        private void OnDialogClosed(object sender, EventArgs e)
+        {
+            
         }
 
         private void EditEndAmount_KeyPress(object sender, View.KeyEventArgs e)
