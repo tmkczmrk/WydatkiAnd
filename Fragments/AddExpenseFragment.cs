@@ -63,19 +63,16 @@ namespace WydatkiAnd.Fragments
                 e.Handled = false;
                 if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
                 {
-                    double doubleValue = 0;
-
-                    doubleValue = Java.Lang.Double.ParseDouble(amountEdit.Text.ToString().Replace(',', '.'));
-
-                    expenseAmount = doubleValue;
-
+                   
+                    expenseAmount = Java.Lang.Double.ParseDouble(amountEdit.Text.ToString().Replace(',', '.'));
+                    
                     InputMethodManager inputManager = (InputMethodManager)context.GetSystemService(Context.InputMethodService);
                     inputManager.HideSoftInputFromWindow(amountEdit.WindowToken, HideSoftInputFlags.None);
                     e.Handled = true;
                 }
             };
 
-            expenseDate = DateTime.Now;
+            expenseDate = DateTime.Today;
             dateEdit.Text = expenseDate.ToShortDateString();
 
 
@@ -145,7 +142,25 @@ namespace WydatkiAnd.Fragments
                 db.SaveItem(expense);
             }
 
-            Toast.MakeText(this.Activity, string.Format("Dodałeś wydatek: {0}, {1}", expense.Amount, expense.Date.ToShortDateString()), ToastLength.Short).Show();
+            Toast.MakeText(this.Activity, string.Format
+                ("Dodałeś wydatek: {0}, {1}", expense.Amount, expense.Date.ToShortDateString()),
+                ToastLength.Short).Show();
+
+            if (expenseCat ==1 && expenseDate.Month == DateTime.Today.Month)
+            {
+                float bills = Application.Context.GetSharedPreferences
+                    ("MyNumbers", FileCreationMode.Private).GetFloat("EstBills", 0);
+
+                float estBills = bills - (float)expense.Amount;
+
+                if (estBills < 0)
+                {
+                    estBills = 0;
+                }
+
+                Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private).
+                    Edit().PutFloat("EstBills", estBills).Commit();
+            }
         }
 
         private void LoadSpinnerData()
