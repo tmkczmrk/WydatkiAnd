@@ -50,6 +50,15 @@ namespace WydatkiAnd
 
             AddBtn.Click += AddBtn_Click;
             ReportsBtn.Click += ReportsBtn_Click;
+            
+            editMonthLimit.KeyPress += EditMonthLimit_KeyPress;
+            editEstBills.KeyPress += EditEstBills_KeyPress;
+            
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
 
             var limit = Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private);
             monthLimit = limit.GetFloat("Limit", 0);
@@ -61,10 +70,6 @@ namespace WydatkiAnd
 
             editEstBills.Text = estBills.ToString();
             balanceTV.Text = balance.ToString();
-
-            editMonthLimit.KeyPress += EditMonthLimit_KeyPress;
-            editEstBills.KeyPress += EditEstBills_KeyPress;
-            
         }
 
         private void EditEstBills_KeyPress(object sender, Android.Views.View.KeyEventArgs e)
@@ -73,6 +78,9 @@ namespace WydatkiAnd
             if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
             {
                 estBills = Java.Lang.Float.ParseFloat(editEstBills.Text.ToString().Replace(',', '.'));
+
+                Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private).
+                    Edit().PutFloat("EstBills", estBills).Commit();
 
                 InputMethodManager inputManager = (InputMethodManager)Application.GetSystemService(Context.InputMethodService);
                 inputManager.HideSoftInputFromWindow(editEstBills.WindowToken, HideSoftInputFlags.None);
@@ -86,6 +94,9 @@ namespace WydatkiAnd
             if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
             {
                 monthLimit = Java.Lang.Float.ParseFloat(editMonthLimit.Text.ToString().Replace(',', '.'));
+
+                Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private).
+                    Edit().PutFloat("Limit", monthLimit).Commit();
 
                 InputMethodManager inputManager = (InputMethodManager)Application.GetSystemService(Context.InputMethodService);
                 inputManager.HideSoftInputFromWindow(editMonthLimit.WindowToken, HideSoftInputFlags.None);
