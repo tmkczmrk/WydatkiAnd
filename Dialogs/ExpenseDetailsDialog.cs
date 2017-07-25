@@ -28,6 +28,9 @@ namespace WydatkiAnd
         private static Expense expense;
         private static int id { get; set; }
         private string selectedCatName;
+        private bool billUp = false;
+        private bool billDown = false;
+        private double diff;
 
         public event EventHandler DialogClosed;
 
@@ -130,6 +133,20 @@ namespace WydatkiAnd
 
                 doubleValue = Java.Lang.Double.ParseDouble(editAmount.Text.ToString().Replace(',', '.'));
 
+                if (doubleValue > expense.Amount)
+                {
+                    diff = doubleValue - expense.Amount;
+                    billUp = true;
+                    billDown = false;
+                }
+
+                if (doubleValue < expense.Amount)
+                {
+                    diff = expense.Amount - doubleValue;
+                    billDown = true;
+                    billUp = false;
+                }
+
                 expense.Amount = doubleValue;
 
                 InputMethodManager inputManager = (InputMethodManager)Activity.GetSystemService(Context.InputMethodService);
@@ -194,6 +211,18 @@ namespace WydatkiAnd
                 db.DeleteItem(expense);
             }
 
+            if (expense.CategoryId == 1 && expense.Date.Month == DateTime.Today.Month)
+            {
+                float bills = Application.Context.GetSharedPreferences
+                    ("MyNumbers", FileCreationMode.Private).GetFloat("EstBills", 0);
+
+                float estBills = bills + (float)expense.Amount;
+
+                Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private).
+                    Edit().PutFloat("EstBills", estBills).Commit();
+            }
+
+
             dialog.Dismiss();
         }
 
@@ -213,7 +242,34 @@ namespace WydatkiAnd
                 db.SaveItem(expense);
             }
 
-            dialog.Dismiss();
+            if (expense.CategoryId == 1 && expense.Date.Month == DateTime.Today.Month && billUp)
+            {
+                float bills = Application.Context.GetSharedPreferences
+                    ("MyNumbers", FileCreationMode.Private).GetFloat("EstBills", 0);
+
+                float estBills = bills - (float)diff;
+
+                if (estBills < 0)
+                {
+                    estBills = 0;
+                }
+
+                Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private).
+                    Edit().PutFloat("EstBills", estBills).Commit();
+            }
+
+            if (expense.CategoryId == 1 && expense.Date.Month == DateTime.Today.Month && billDown)
+            {
+                float bills = Application.Context.GetSharedPreferences
+                    ("MyNumbers", FileCreationMode.Private).GetFloat("EstBills", 0);
+
+                float estBills = bills + (float)diff;
+
+                Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private).
+                    Edit().PutFloat("EstBills", estBills).Commit();
+            }
+
+                dialog.Dismiss();
         }
     }
 }
