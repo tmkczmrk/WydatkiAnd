@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:stretchColumns="0"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
+        <TableRow>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout1"
+                android:padding="5dp">
+                <TextView
+                    android:text="Wybierz miesiąc:"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/textView1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:padding="2dp" />
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:minWidth="100dp"
+                    android:id="@+id/spinnerRep1"
+                    android:padding="2dp" />
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/spinnerRep2"
+                    android:padding="2dp"
+                    android:layout_marginLeft="5dp" />
+            </LinearLayout>
+        </TableRow>
+        <TableRow>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+id/linearLayout2"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="5dp">
+                <TextView
+                    android:text="Stan początkowy kasy"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textView2" />
+            </LinearLayout>
+        </TableRow>
+        <TableRow>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+id/linearLayout3"
+                android:gravity="center_horizontal"
+                android:padding="5dp">
+                <EditText
+                    android:inputType="numberDecimal"
+                    android:digits="0123456789.,"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/editRepStart"
+                    android:minWidth="100dp" />
+            </LinearLayout>
+        </TableRow>
+        <TableRow>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+id/linearLayout4"
+                android:padding="5dp"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="Stan końcowy kasy"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textRepEnd" />
+            </LinearLayout>
+        </TableRow>
+        <TableRow>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+id/linearLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center_horizontal">
+                <EditText
+                    android:inputType="numberDecimal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:digits="0123456789.,"
+                    android:id="@+id/editRepEnd"
+                    android:minWidth="100dp" />
+            </LinearLayout>
+        </TableRow>
+        <TableRow>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+id/linearLayout12"
+                android:gravity="center_horizontal"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:text="Wyświetl Raport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnRepShow"
+                    android:minWidth="130dp" />
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+</ScrollView>

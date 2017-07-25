@@ -6,13 +6,13 @@
     android:background="@android:color/holo_blue_light"
     android:minWidth="25px"
     android:minHeight="25px">
-<!--<include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />-->
+
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:stretchColumns="0">
+        android:stretchColumns="0"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
         <TableRow>
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -69,7 +69,7 @@
             </RelativeLayout>
         </TableRow>
         <TableRow>
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_marginTop="10dp"
@@ -77,54 +77,48 @@
                 <TextView
                     android:text="Limit miesięczny:"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textMonthLimit"
-                    android:paddingLeft="20dp" />
-                <TextView
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/textMonthLimit"
-                    android:id="@+id/textMonthLimitShow"
-                    android:paddingLeft="100dp" />
-                <Button
-                    android:text="Zmień"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:id="@+id/btnChangeMonthLimit"
-                    android:layout_marginRight="20dp" />
-            </RelativeLayout>
+                    android:textColor="@android:color/background_dark"
+                    android:id="@+id/textMonthLimit"
+                    android:paddingLeft="20dp" />
+                <EditText
+                    android:inputType="numberDecimal"
+                    android:digits="0123456789.,"
+                    android:layout_column="0"
+                    android:id="@+id/editMonthLimit"
+                    android:minWidth="100dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right" />
+            
+            </LinearLayout>
         </TableRow>
         <TableRow>
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp">
                 <TextView
-                    android:text="Szacunkowe rachunki:"
+                    android:text="Pozostałe rachunki:"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textEstBills"
-                    android:paddingLeft="20dp" />
-                <TextView
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/textEstBills"
-                    android:id="@+id/textEstBillsShow"
-                    android:paddingLeft="100dp" />
-                <Button
-                    android:text="Zmień"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:id="@+id/btnChangeEstBills"
-                    android:layout_marginRight="20dp" />
-            </RelativeLayout>
+                    android:textColor="@android:color/background_dark"
+                    android:id="@+id/textEstBills"
+                    android:paddingLeft="20dp" />
+                <EditText
+                    android:inputType="numberDecimal"
+                    android:digits="0123456789.,"
+                    android:layout_column="0"
+                    android:id="@+id/editEstBills"
+                    android:minWidth="80dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right" />
+            
+            </LinearLayout>
         </TableRow>
     </TableLayout>
 </RelativeLayout>
