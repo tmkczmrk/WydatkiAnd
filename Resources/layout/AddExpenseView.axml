@@ -20,8 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tableLayout2"
-            android:descendantFocusability="beforeDescendants"
-            android:focusableInTouchMode="true">
+            >
             <TableRow
                 android:id="@+id/tableRow21"
                 android:minWidth="25px"

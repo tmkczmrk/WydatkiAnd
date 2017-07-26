@@ -6,4 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/holo_blue_light"
     android:minWidth="25px"
-    android:minHeight="25px" />
+    android:minHeight="25px"
+    android:focusable="true"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"/>
