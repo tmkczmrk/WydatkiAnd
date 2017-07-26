@@ -53,26 +53,39 @@ namespace WydatkiAnd.Fragments
             editStartAmount = view.FindViewById<EditText>(Resource.Id.editRepStart);
             editEndAmount = view.FindViewById<EditText>(Resource.Id.editRepEnd);
             btnShowReport = view.FindViewById<Button>(Resource.Id.btnRepShow);
-            
-            editStartAmount.KeyPress += EditStartAmount_KeyPress;
-            editEndAmount.KeyPress += EditEndAmount_KeyPress;
-            btnShowReport.Click += BtnShowReport_Click;
 
-            
-            LoadMonthsSpinnerData();
-            LoadYearsSpinnerData();
+            bool databaseEmpty=true;
+            using (var db = new ExpenseManager())
+            {
+                if(db.GetAllItems().FirstOrDefault() != null)
+                {
+                    databaseEmpty = false;
+                }
+                
+            }
 
-            int monthNow = today.Month - 1;
-            int yearNow = today.Year;
-            monthsSpinner.SetSelection(monthNow);
-            yearsSpinner.SetSelection(years.FindIndex(y => y == yearNow));
+            if (!databaseEmpty)
+            {
 
-            monthsSpinner.ItemSelected += MonthsSpinner_ItemSelected;
-            yearsSpinner.ItemSelected += YearsSpinner_ItemSelected;
-            selectedMonth = today.Month;
-            selectedYear = today.Year;
+                editStartAmount.KeyPress += EditStartAmount_KeyPress;
+                editEndAmount.KeyPress += EditEndAmount_KeyPress;
+                btnShowReport.Click += BtnShowReport_Click;
 
-            SetAmounts();
+                LoadMonthsSpinnerData();
+                LoadYearsSpinnerData();
+
+                int monthNow = today.Month - 1;
+                int yearNow = today.Year;
+                monthsSpinner.SetSelection(monthNow);
+                yearsSpinner.SetSelection(years.FindIndex(y => y == yearNow));
+
+                monthsSpinner.ItemSelected += MonthsSpinner_ItemSelected;
+                yearsSpinner.ItemSelected += YearsSpinner_ItemSelected;
+                selectedMonth = today.Month;
+                selectedYear = today.Year;
+
+                SetAmounts();
+            }
             
             return view;
         }
@@ -157,22 +170,19 @@ namespace WydatkiAnd.Fragments
         private void LoadYearsSpinnerData()
         {
 
-            int dateMax;
-            int dateMin;
+            int yearMax;
+            int yearMin;
 
             using (var db = new ExpenseManager())
             {
-                dateMax = (from a in db.GetAllItems()
-                            select a.Date).Max().Year;
-
-                dateMin = (from a in db.GetAllItems()
-                               select a.Date).Min().Year;
+                yearMax = db.GetAllItems().Max(a => a.Date).Year;
+                yearMin = db.GetAllItems().Min(a => a.Date).Year;
                 
             }
-            while (dateMax >= dateMin)
+            while (yearMax >= yearMin)
             {
-                years.Add(dateMin);
-                dateMin++;
+                years.Add(yearMin);
+                yearMin++;
             }
 
             var categoryAdapter = new ArrayAdapter<int>(
@@ -214,7 +224,7 @@ namespace WydatkiAnd.Fragments
 
             if (startAmount == -1)
             {
-                editStartAmount.Text = "Brak danych";
+                editStartAmount.Text = "";
             }
             else
             {
@@ -226,7 +236,7 @@ namespace WydatkiAnd.Fragments
 
             if (endAmount == -1)
             {
-                editEndAmount.Text = "Brak danych";
+                editEndAmount.Text = "";
             }
             else
             {
