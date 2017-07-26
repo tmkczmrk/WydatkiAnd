@@ -92,45 +92,62 @@ namespace WydatkiAnd.Dialogs
 
         private void BtnEditCat_Click(object sender, EventArgs e)
         {
-            selectedCat.Name = editEditCat.Text;
-            using (var db = new CategoryManager())
+            if (editEditCat.Text != "")
             {
-                db.SaveItem(selectedCat);
-            }
+                selectedCat.Name = editEditCat.Text;
+                using (var db = new CategoryManager())
+                {
+                    db.SaveItem(selectedCat);
+                }
 
-            Dialog.Dismiss();
+                Dialog.Dismiss();
+            }
+            else
+            {
+                Toast.MakeText(this.Activity, string.Format("Nazwa nie może być pusta"), ToastLength.Short).Show();
+            }
         }
 
         private void BtnDelCat_Click(object sender, EventArgs e)
         {
-            using (var db = new CategoryManager())
-            {
-                db.DeleteItem(selectedCat);
-            }
 
-            using (var db = new ExpenseManager())
+            if (selectedCat != null)
             {
-                var expenses = db.GetItemsByCategory(selectedCat);
-                foreach (var exp in expenses)
+                using (var db = new CategoryManager())
                 {
-                    exp.CategoryId = 2;
-                    db.SaveItem(exp);
+                    db.DeleteItem(selectedCat);
                 }
-            }
 
-            Dialog.Dismiss();
+                using (var db = new ExpenseManager())
+                {
+                    var expenses = db.GetItemsByCategory(selectedCat);
+                    foreach (var exp in expenses)
+                    {
+                        exp.CategoryId = 2;
+                        db.SaveItem(exp);
+                    }
+                }
+
+                Dialog.Dismiss();
+            }
         }
 
         private void BtnAddCat_Click(object sender, EventArgs e)
         {
-            Category category = new Category(editAddCat.Text);
-            using (var db = new CategoryManager())
+            if (editAddCat.Text != "")
             {
-                db.SaveItem(category);
+                Category category = new Category(editAddCat.Text);
+                using (var db = new CategoryManager())
+                {
+                    db.SaveItem(category);
+                }
+
+                Dialog.Dismiss();
             }
-
-            Dialog.Dismiss();
-
+            else
+            {
+                Toast.MakeText(this.Activity, string.Format("Nazwa nie może być pusta"), ToastLength.Short).Show();
+            }
         }
 
         private void Spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
