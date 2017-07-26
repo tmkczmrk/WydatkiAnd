@@ -6,7 +6,6 @@
     android:background="@android:color/holo_blue_light"
     android:minWidth="25px"
     android:minHeight="25px">
-
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -35,38 +34,31 @@
             </RelativeLayout>
         </TableRow>
         <TableRow>
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_marginBottom="40dp"
-                android:layout_marginTop="30dp">
+                android:layout_marginTop="30dp"
+                android:gravity="center_horizontal">
                 <TextView
-                    android:text="@string/Welcome"
+                    android:text="Jesteś "
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textWelcome"
-                    android:textColor="@android:color/background_dark"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:paddingLeft="20dp" />
+                    android:id="@+id/textWelcome" />
                 <TextView
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:id="@+id/textBalance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/textWelcome"
-                    android:paddingLeft="100dp" />
+                    android:minWidth="5dp" />
                 <TextView
-                    android:text="do przodu/do tyłu"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@id/textWelcome"
                     android:id="@+id/textPlusMinus"
-                    android:paddingRight="20dp" />
-            </RelativeLayout>
+                    android:minWidth="5dp" />
+            </LinearLayout>
         </TableRow>
         <TableRow>
             <LinearLayout
@@ -91,7 +83,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="right" />
-            
             </LinearLayout>
         </TableRow>
         <TableRow>
@@ -117,7 +108,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="right" />
-            
             </LinearLayout>
         </TableRow>
     </TableLayout>

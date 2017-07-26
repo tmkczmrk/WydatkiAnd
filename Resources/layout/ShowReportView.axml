@@ -22,7 +22,7 @@
                 android:id="@+id/linearLayout1"
                 android:padding="5dp">
                 <TextView
-                    android:text="Wybierz miesiąc:"
+                    android:text="Miesiąc:"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:id="@+id/textView1"
                     android:layout_height="wrap_content"
