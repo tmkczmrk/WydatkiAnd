@@ -28,6 +28,16 @@ namespace WydatkiAnd.Dialogs
         private static int selectedMonth { get; set; }
         private static int selectedYear { get; set; }
 
+        private DateTime startDate;
+        private DateTime endDate;
+        private double catSum;
+        private double expensesSum;
+        private double incomesSum;
+        private float realSum;
+        private float startAmount;
+        private float endAmount;
+        
+
         public event EventHandler DialogClosed;
 
         public override void OnDismiss(IDialogInterface dialog)
@@ -68,11 +78,41 @@ namespace WydatkiAnd.Dialogs
                 spinner = dialogView.FindViewById<Spinner>(Resource.Id.spinnerRep);
 
                 GetTVText();
+
+                startDate = new DateTime(selectedYear, selectedMonth, 1);
+                endDate = startDate.AddMonths(1).AddDays(-1);
+
+                LoadSpinnerData();
+                spinner.ItemSelected += Spinner_ItemSelected;
+                spinner.SetSelection(1);
+
+                
+                using (var db = new ExpenseManager())
+                {
+                    expensesSum = db.GetItemsByDates(startDate, endDate).Sum(a => a.Amount);
+                }
+
+                expensesTV.Text = expensesSum.ToString();
+
+
+                SetAmounts();
+                if (startAmount == -1 || endAmount == -1)
+                {
+                    realExpensesTV.Text = "Brak wystarczających danych";
+                } else
+                {
+                    using (var db = new IncomeManager())
+                    {
+                        incomesSum = db.GetItemsByDates(startDate, endDate).Sum(a => a.Amount);
+                    }
+
+                    realSum = startAmount + (float)incomesSum - endAmount;
+                    realExpensesTV.Text = realSum.ToString();
+                }
+
                 
 
-
-
-
+                
 
                 builder.SetView(dialogView);
                 builder.SetNeutralButton("Wróć", HandleNeutralButtonClick);
@@ -81,6 +121,40 @@ namespace WydatkiAnd.Dialogs
             var dialog = builder.Create();
 
             return dialog;
+        }
+
+        private void Spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            var mySpinner = (Spinner)sender;
+            string selectedCatName = string.Format("{0}", mySpinner.GetItemAtPosition(e.Position));
+
+            using (var db = new ExpenseManager())
+            {
+                catSum = db.GetSomeItems(startDate, endDate, selectedCatName)
+                    .Sum(a => a.Amount);
+            }
+
+            catTV.Text = catSum.ToString();
+
+        }
+
+        private void LoadSpinnerData()
+        {
+            List<Category> categoriesList;
+
+            using (var db = new CategoryManager())
+            {
+                categoriesList = db.GetAllItems();
+            }
+
+            var categories = categoriesList.Select(category => category.Name).ToList();
+
+            var categoryAdapter = new ArrayAdapter<string>(
+                Activity, Android.Resource.Layout.SimpleSpinnerItem, categories);
+
+            categoryAdapter.SetDropDownViewResource
+                (Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            spinner.Adapter = categoryAdapter;
         }
 
         private void HandleNeutralButtonClick(object sender, DialogClickEventArgs e)
@@ -132,6 +206,26 @@ namespace WydatkiAnd.Dialogs
             }
 
             yearTV.Text = selectedYear.ToString();
+        }
+
+        private void SetAmounts()
+        {
+            string amountKeyEnd;
+            string amountKeyStart = selectedMonth.ToString() + selectedYear.ToString();
+
+            if (selectedMonth == 12)
+            {
+                amountKeyEnd = "1" + (selectedYear + 1).ToString();
+            }
+            else
+            {
+                amountKeyEnd = (selectedMonth + 1).ToString() + selectedYear.ToString();
+            }
+
+            startAmount = Application.Context.GetSharedPreferences
+                ("MyNumbers", FileCreationMode.Private).GetFloat(amountKeyStart, -1);
+            endAmount = Application.Context.GetSharedPreferences
+                ("MyNumbers", FileCreationMode.Private).GetFloat(amountKeyEnd, -1);
         }
     }
 }
