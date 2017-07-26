@@ -104,14 +104,23 @@ namespace WydatkiAnd.Fragments
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
-            Income income = new Income(incomeAmount, incomeDate, incomeDetails);
-            using (var db = new IncomeManager())
+            if (incomeAmount != 0)
             {
+                Income income = new Income(incomeAmount, incomeDate, incomeDetails);
+                using (var db = new IncomeManager())
+                {
 
-                db.SaveItem(income);
+                    db.SaveItem(income);
+                }
+
+                Toast.MakeText(this.Activity, string.Format
+                    ("Dodałeś przychód: {0}, {1}, {2}", income.Amount, income.Date.ToShortDateString(), income.Details)
+                    , ToastLength.Short).Show();
             }
-
-            Toast.MakeText(this.Activity, string.Format("Dodałeś przychód: {0}, {1}, {2}", income.Amount, income.Date.ToShortDateString(), income.Details), ToastLength.Short).Show();
+            else
+            {
+                Toast.MakeText(this.Activity, string.Format("Podaj kwotę przychodu"), ToastLength.Short).Show();
+            }
         }
     }
 

@@ -135,6 +135,7 @@ namespace WydatkiAnd.Fragments
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
+            if (expenseAmount!=0) { 
             Expense expense = new Expense(expenseAmount, expenseDate, expenseDetails, expenseCat);
             using (var db = new ExpenseManager())
             {
@@ -146,20 +147,27 @@ namespace WydatkiAnd.Fragments
                 ("Dodałeś wydatek: {0}, {1}", expense.Amount, expense.Date.ToShortDateString()),
                 ToastLength.Short).Show();
 
-            if (expenseCat ==1 && expenseDate.Month == DateTime.Today.Month)
-            {
-                float bills = Application.Context.GetSharedPreferences
-                    ("MyNumbers", FileCreationMode.Private).GetFloat("EstBills", 0);
-
-                float estBills = bills - (float)expense.Amount;
-
-                if (estBills < 0)
+                if (expenseCat == 1 && expenseDate.Month == DateTime.Today.Month)
                 {
-                    estBills = 0;
-                }
+                    float bills = Application.Context.GetSharedPreferences
+                        ("MyNumbers", FileCreationMode.Private).GetFloat("EstBills", 0);
 
-                Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private).
-                    Edit().PutFloat("EstBills", estBills).Commit();
+                    float estBills = bills - (float)expense.Amount;
+
+                    if (estBills < 0)
+                    {
+                        estBills = 0;
+                    }
+
+                    Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private).
+                        Edit().PutFloat("EstBills", estBills).Commit();
+                }
+                
+            }
+            else
+            {
+                Toast.MakeText(this.Activity, string.Format
+            ("Podaj kwotę wydatku"), ToastLength.Short).Show();
             }
         }
 
