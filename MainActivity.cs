@@ -77,16 +77,29 @@ namespace WydatkiAnd
             e.Handled = false;
             if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
             {
-                estBills = Java.Lang.Float.ParseFloat(editEstBills.Text.ToString().Replace(',', '.'));
+                float floatValue;
 
-                Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private).
-                    Edit().PutFloat("EstBills", estBills).Commit();
+                bool isFloat = float.TryParse
+                    (editEstBills.Text.ToString().Replace('.', ','), out floatValue);
 
-                InputMethodManager inputManager = (InputMethodManager)Application.GetSystemService(Context.InputMethodService);
-                inputManager.HideSoftInputFromWindow(editEstBills.WindowToken, HideSoftInputFlags.None);
-                e.Handled = true;
+                if (isFloat)
+                {
+                    estBills = floatValue;
+
+                    Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private).
+                        Edit().PutFloat("EstBills", estBills).Commit();
+
+                    InputMethodManager inputManager = (InputMethodManager)Application.GetSystemService(Context.InputMethodService);
+                    inputManager.HideSoftInputFromWindow(editEstBills.WindowToken, HideSoftInputFlags.None);
+                    e.Handled = true;
+                    CountBalance();
+                }
+                else
+                {
+                    Toast.MakeText(this, string.Format("Nieprawidłowa kwota"), ToastLength.Short).Show();
+                }
             }
-            CountBalance();
+            
         }
 
         private void EditMonthLimit_KeyPress(object sender, Android.Views.View.KeyEventArgs e)
@@ -94,16 +107,30 @@ namespace WydatkiAnd
             e.Handled = false;
             if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
             {
-                monthLimit = Java.Lang.Float.ParseFloat(editMonthLimit.Text.ToString().Replace(',', '.'));
+                float floatValue;
 
-                Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private).
-                    Edit().PutFloat("Limit", monthLimit).Commit();
+                bool isFloat = float.TryParse
+                    (editMonthLimit.Text.ToString().Replace('.', ','), out floatValue);
 
-                InputMethodManager inputManager = (InputMethodManager)Application.GetSystemService(Context.InputMethodService);
-                inputManager.HideSoftInputFromWindow(editMonthLimit.WindowToken, HideSoftInputFlags.None);
-                e.Handled = true;
+                if (isFloat)
+                {
+
+                    monthLimit = floatValue;
+
+                    Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private).
+                        Edit().PutFloat("Limit", monthLimit).Commit();
+
+                    InputMethodManager inputManager = (InputMethodManager)Application.GetSystemService(Context.InputMethodService);
+                    inputManager.HideSoftInputFromWindow(editMonthLimit.WindowToken, HideSoftInputFlags.None);
+                    e.Handled = true;
+                    CountBalance();
+                }
+                else
+                {
+                    Toast.MakeText(this, string.Format("Nieprawidłowa kwota"), ToastLength.Short).Show();
+                }
             }
-            CountBalance();
+            
         }
 
         void FindId()

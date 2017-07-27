@@ -129,29 +129,37 @@ namespace WydatkiAnd
             e.Handled = false;
             if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
             {
-                double doubleValue = 0;
+                double doubleValue;
 
-                doubleValue = Java.Lang.Double.ParseDouble(editAmount.Text.ToString().Replace(',', '.'));
+                bool isDouble = Double.TryParse
+                    (editAmount.Text.ToString().Replace('.', ','), out doubleValue);
 
-                if (doubleValue > expense.Amount)
+                if (isDouble)
                 {
-                    diff = doubleValue - expense.Amount;
-                    billUp = true;
-                    billDown = false;
-                }
+                    if (doubleValue > expense.Amount)
+                    {
+                        diff = doubleValue - expense.Amount;
+                        billUp = true;
+                        billDown = false;
+                    }
 
-                if (doubleValue < expense.Amount)
+                    if (doubleValue < expense.Amount)
+                    {
+                        diff = expense.Amount - doubleValue;
+                        billDown = true;
+                        billUp = false;
+                    }
+
+                    expense.Amount = doubleValue;
+
+                    InputMethodManager inputManager = (InputMethodManager)Activity.GetSystemService(Context.InputMethodService);
+                    inputManager.HideSoftInputFromWindow(editAmount.WindowToken, HideSoftInputFlags.None);
+                    e.Handled = true;
+                }
+                else
                 {
-                    diff = expense.Amount - doubleValue;
-                    billDown = true;
-                    billUp = false;
+                    Toast.MakeText(this.Activity, string.Format("Nieprawidłowa kwota"), ToastLength.Short).Show();
                 }
-
-                expense.Amount = doubleValue;
-
-                InputMethodManager inputManager = (InputMethodManager)Activity.GetSystemService(Context.InputMethodService);
-                inputManager.HideSoftInputFromWindow(editAmount.WindowToken, HideSoftInputFlags.None);
-                e.Handled = true;
             }
         }
 
@@ -173,7 +181,7 @@ namespace WydatkiAnd
                 }
                 else
                 {
-                    editDate.Text = "";
+                    Toast.MakeText(this.Activity, string.Format("Nieprawidłowa data"), ToastLength.Short).Show();
                 }
             }
         }

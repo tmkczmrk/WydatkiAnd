@@ -81,15 +81,23 @@ namespace WydatkiAnd
                     e.Handled = false;
                     if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
                     {
-                        double doubleValue = 0;
+                        double doubleValue;
 
-                        doubleValue = Java.Lang.Double.ParseDouble(editAmount.Text.ToString().Replace(',', '.'));
+                        bool isDouble = Double.TryParse
+                        (editAmount.Text.ToString().Replace('.', ','), out doubleValue);
 
-                        income.Amount = doubleValue;
-                       
-                        InputMethodManager inputManager = (InputMethodManager)Activity.GetSystemService(Context.InputMethodService);
-                        inputManager.HideSoftInputFromWindow(editAmount.WindowToken, HideSoftInputFlags.None);
-                        e.Handled = true;
+                        if (isDouble)
+                        {
+                            income.Amount = doubleValue;
+
+                            InputMethodManager inputManager = (InputMethodManager)Activity.GetSystemService(Context.InputMethodService);
+                            inputManager.HideSoftInputFromWindow(editAmount.WindowToken, HideSoftInputFlags.None);
+                            e.Handled = true;
+                        }
+                        else
+                        {
+                            Toast.MakeText(this.Activity, string.Format("Nieprawidłowa kwota"), ToastLength.Short).Show();
+                        }
                     }
                 };
 
@@ -110,7 +118,7 @@ namespace WydatkiAnd
                         }
                         else
                         {
-                            editDate.Text = "";
+                            Toast.MakeText(this.Activity, string.Format("Nieprawidłowa data"), ToastLength.Short).Show();
                         }
                     }
                 };

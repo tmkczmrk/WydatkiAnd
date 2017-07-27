@@ -16,6 +16,7 @@ using Android.Text;
 using WydatkiAnd.Models;
 using WydatkiAnd.Database;
 using Android.Views.InputMethods;
+using System.Globalization;
 
 namespace WydatkiAnd.Fragments
 {
@@ -53,15 +54,24 @@ namespace WydatkiAnd.Fragments
                 e.Handled = false;
                 if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
                 {
-                    double doubleValue = 0;
+                    
+                    double doubleValue;
+                    
+                    bool isDouble = Double.TryParse
+                    (amountEdit.Text.ToString().Replace('.', ','), out doubleValue);
+                    
+                    if (isDouble)
+                    {
+                        incomeAmount = doubleValue;
 
-                    doubleValue = Java.Lang.Double.ParseDouble(amountEdit.Text.ToString().Replace(',', '.'));
-
-                    incomeAmount = doubleValue;
-
-                    InputMethodManager inputManager = (InputMethodManager)context.GetSystemService(Context.InputMethodService);
-                    inputManager.HideSoftInputFromWindow(amountEdit.WindowToken, HideSoftInputFlags.None);
-                    e.Handled = true;
+                        InputMethodManager inputManager = (InputMethodManager)context.GetSystemService(Context.InputMethodService);
+                        inputManager.HideSoftInputFromWindow(amountEdit.WindowToken, HideSoftInputFlags.None);
+                        e.Handled = true;
+                    }
+                    else
+                    {
+                        Toast.MakeText(this.Activity, string.Format("Nieprawidłowa kwota"), ToastLength.Short).Show();
+                    }
                 }
             };
 
@@ -86,6 +96,7 @@ namespace WydatkiAnd.Fragments
                     inputManager.HideSoftInputFromWindow(detailsEdit.WindowToken, HideSoftInputFlags.None);
                     e.Handled = true;
                 }
+                
             };
 
             addBtn.Click += AddBtn_Click;
@@ -119,7 +130,7 @@ namespace WydatkiAnd.Fragments
             }
             else
             {
-                Toast.MakeText(this.Activity, string.Format("Podaj kwotę przychodu"), ToastLength.Short).Show();
+                Toast.MakeText(this.Activity, string.Format("Kwota musi być inna niż 0"), ToastLength.Short).Show();
             }
         }
     }

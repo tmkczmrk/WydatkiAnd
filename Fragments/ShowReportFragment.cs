@@ -124,15 +124,26 @@ namespace WydatkiAnd.Fragments
             e.Handled = false;
             if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
             {
+                float floatValue;
 
-                endAmount = Java.Lang.Float.ParseFloat(editEndAmount.Text.ToString().Replace(',', '.'));
+                bool isFloat = float.TryParse
+                    (editEndAmount.Text.ToString().Replace('.', ','), out floatValue);
 
-                Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private).
-                    Edit().PutFloat(amountKeyEnd, endAmount).Commit();
+                if (isFloat)
+                {
+                    endAmount = floatValue;
 
-                InputMethodManager inputManager = (InputMethodManager)this.Activity.GetSystemService(Context.InputMethodService);
-                inputManager.HideSoftInputFromWindow(editEndAmount.WindowToken, HideSoftInputFlags.None);
-                e.Handled = true;
+                    Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private).
+                        Edit().PutFloat(amountKeyEnd, endAmount).Commit();
+
+                    InputMethodManager inputManager = (InputMethodManager)this.Activity.GetSystemService(Context.InputMethodService);
+                    inputManager.HideSoftInputFromWindow(editEndAmount.WindowToken, HideSoftInputFlags.None);
+                    e.Handled = true;
+                }
+                else
+                {
+                    Toast.MakeText(this.Activity, string.Format("Nieprawidłowa kwota"), ToastLength.Short).Show();
+                }
             }
         }
 
@@ -141,14 +152,27 @@ namespace WydatkiAnd.Fragments
             e.Handled = false;
             if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
             {
-                startAmount = Java.Lang.Float.ParseFloat(editStartAmount.Text.ToString().Replace(',', '.'));
 
-                Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private).
-                    Edit().PutFloat(amountKeyStart, startAmount).Commit();
-                
-                InputMethodManager inputManager = (InputMethodManager)this.Activity.GetSystemService(Context.InputMethodService);
-                inputManager.HideSoftInputFromWindow(editStartAmount.WindowToken, HideSoftInputFlags.None);
-                e.Handled = true;
+                float floatValue;
+
+                bool isFloat = float.TryParse
+                    (editStartAmount.Text.ToString().Replace('.', ','), out floatValue);
+
+                if (isFloat)
+                {
+                    startAmount = floatValue;
+
+                    Application.Context.GetSharedPreferences("MyNumbers", FileCreationMode.Private).
+                        Edit().PutFloat(amountKeyStart, startAmount).Commit();
+
+                    InputMethodManager inputManager = (InputMethodManager)this.Activity.GetSystemService(Context.InputMethodService);
+                    inputManager.HideSoftInputFromWindow(editStartAmount.WindowToken, HideSoftInputFlags.None);
+                    e.Handled = true;
+                }
+                else
+                {
+                    Toast.MakeText(this.Activity, string.Format("Nieprawidłowa kwota"), ToastLength.Short).Show();
+                }
             }
 
         }

@@ -63,12 +63,22 @@ namespace WydatkiAnd.Fragments
                 e.Handled = false;
                 if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
                 {
-                   
-                    expenseAmount = Java.Lang.Double.ParseDouble(amountEdit.Text.ToString().Replace(',', '.'));
-                    
-                    InputMethodManager inputManager = (InputMethodManager)context.GetSystemService(Context.InputMethodService);
-                    inputManager.HideSoftInputFromWindow(amountEdit.WindowToken, HideSoftInputFlags.None);
-                    e.Handled = true;
+                    double doubleValue;
+
+                    bool isDouble = Double.TryParse
+                    (amountEdit.Text.ToString().Replace('.', ','), out doubleValue);
+
+                    if (isDouble)
+                    {
+                        expenseAmount = doubleValue;
+                        InputMethodManager inputManager = (InputMethodManager)context.GetSystemService(Context.InputMethodService);
+                        inputManager.HideSoftInputFromWindow(amountEdit.WindowToken, HideSoftInputFlags.None);
+                        e.Handled = true;
+                    }
+                    else
+                    {
+                        Toast.MakeText(this.Activity, string.Format("Nieprawidłowa kwota"), ToastLength.Short).Show();
+                    }
                 }
             };
 
@@ -166,8 +176,8 @@ namespace WydatkiAnd.Fragments
             }
             else
             {
-                Toast.MakeText(this.Activity, string.Format
-            ("Podaj kwotę wydatku"), ToastLength.Short).Show();
+                Toast.MakeText(this.Activity, string.Format("Kwota musi być inna niż 0")
+                    , ToastLength.Short).Show();
             }
         }
 
