@@ -52,9 +52,10 @@ namespace WydatkiAnd
             tab = ActionBar.NewTab();
             tab.SetText("Raport");
 
-            tab.TabSelected += (sender, args) =>
+            tab.TabSelected += delegate (object sender, ActionBar.TabEventArgs e)
             {
-                // Do something when tab is selected
+                e.FragmentTransaction.Replace(Resource.Id.showHost,
+                    new ShowReportFragment());
             };
             ActionBar.AddTab(tab);
 
